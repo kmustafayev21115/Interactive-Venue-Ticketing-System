@@ -1,0 +1,260 @@
+/* Palette taken from the photos: beech panelling, crimson seats, grey carpet, warm LED strips */
+:root {
+  --wood-50: #faf4ea; 
+  --wood-100: #f1e3cc; 
+  --wood-300: #deb98a; 
+  --wood-700: #6e4524;
+  --seat: #b3173f; 
+  --ink: #2a2320; 
+  --muted: #6b6159; 
+  --carpet: #e4e3df; 
+  --led: #f2c94c;
+  --ok: #2e7d4f;
+  --off: #b9b4ae;
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-ui: "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+* { 
+  box-sizing: border-box; 
+}
+
+body { 
+  margin: 0; 
+  background: var(--wood-50); 
+  color: var(--ink); 
+  font: 16px/1.5 var(--font-ui); 
+}
+h1, h2 { 
+  font-family: var(--font-display); 
+  font-weight: 600; 
+  margin: 0; 
+}
+
+h1 { 
+  font-size: clamp(1.7rem, 4vw, 2.6rem); 
+  line-height: 1.1; 
+}
+
+h2 { 
+  font-size: 1.25rem;
+  margin-bottom: .75rem; 
+}
+
+.masthead {
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: space-between; 
+  align-items: end; 
+  gap: .5rem 2rem;
+  padding: 1.25rem clamp(1rem, 4vw, 2.5rem);
+  background: var(--ink); 
+  color: var(--wood-50); 
+  border-bottom: 5px solid var(--led);
+}
+
+.event {
+  margin: .25rem 0 0;
+  color: var(--wood-300); 
+}
+
+.capacity { 
+  margin: 0; 
+  font-size: .9rem; 
+  color: var(--wood-300); 
+}
+
+.layout {
+  display: grid; gap: 1rem;
+  padding: 1rem clamp(1rem, 4vw, 2.5rem); 
+  grid-template-columns: minmax(0, 1fr); 
+}
+
+@media (min-width: 960px){
+  .layout { 
+    grid-template-columns: minmax(0, 1fr) 340px; 
+    align-items: start; 
+  }
+}
+
+.side { 
+  display: grid; 
+  gap: 1rem; 
+}
+
+.panel { 
+  background: #fff;
+  border: 1px solid var(--wood-100); 
+  border-radius: 10px;
+  padding: 1rem; 
+}
+
+.toolbar { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: .4rem; 
+  margin-bottom: .75rem; 
+}
+
+button { 
+  font: inherit; 
+  padding: .5rem .8rem; 
+  min-height: 40px; 
+  border: 1px solid var(--wood-700); 
+  background: var(--wood-100);
+  color: var(--ink); 
+  border-radius: 6px; 
+  cursor: pointer; 
+}
+
+button:hover:not(:disabled) {
+  background: var(--wood-300);
+}
+
+button:disabled { 
+  opacity: .5; 
+  cursor: not-allowed; 
+}
+
+button:focus-visible { 
+  outline: 3px solid var(--led); 
+  outline-offset: 2px; 
+}
+
+button.primary { 
+  width: 100%;
+  margin-top: .75rem; 
+  background: var(--seat); 
+  border-color: var(--seat); 
+  color: #fff; 
+  font-weight: 700; 
+}
+
+button.primary:hover:not(:disabled) { 
+  background: #8f1032; 
+}
+
+.map-viewport { 
+  position: relative; 
+  overflow: hidden; 
+  height: clamp(300px, 62vh, 640px); 
+  background: var(--carpet); 
+  border-radius: 8px; 
+}
+
+.map-viewport img { 
+  display: block; 
+  width: 100%; 
+  height: 100%; 
+  object-fit: contain; 
+}
+
+.empty { 
+  color: var(--muted); 
+}
+.cart-items { 
+  list-style: none; 
+  margin: 0; 
+  padding: 0; 
+}
+
+.total { 
+  display: flex;
+  justify-content: space-between; 
+  margin: .75rem 0 0; 
+  padding-top: .75rem; 
+  border-top: 2px solid var(--wood-100); 
+  font-size: 1.15rem; 
+}
+
+
+.seat { 
+  display: inline-block;
+  width: 22px; height: 22px; 
+  border-radius: 5px 5px 3px 3px; 
+  background: var(--seat); 
+  border: 2px solid transparent; 
+  vertical-align: middle; 
+}
+
+.seat--inspected { 
+  background: #fff; 
+  border-color: var(--ink); 
+  box-shadow: 0 0 0 3px var(--led); 
+}
+
+.seat--in-cart { 
+  background: var(--ok); 
+}
+
+.seat--unavailable { 
+  background: repeating-linear-gradient(45deg, var(--off) 0 4px, #d9d5d0 4px 8px); 
+}
+
+.legend { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: .5rem 1.25rem; 
+  list-style: none; 
+  margin: .75rem 0 0; 
+  padding: 0; 
+  font-size: .9rem; 
+}
+
+.legend li { 
+  display: flex; 
+  align-items: 
+  center; 
+  gap: .45rem; 
+}
+
+.legend--prices { 
+  flex-direction: column; 
+  margin: 0;
+}
+
+.legend--prices li {
+  justify-content: space-between;
+}
+
+.swatch { 
+  width: 14px;
+  height: 14px; 
+  border-radius: 3px; 
+  display: inline-block;
+  margin-right: .45rem; 
+}
+
+.gallery { 
+  display: grid; 
+  gap: 1rem; 
+  padding: 0 clamp(1rem, 4vw, 2.5rem) 2rem; 
+}
+
+.gallery h2 { 
+  grid-column: 1 / -1; 
+  margin-bottom: 0; 
+}
+
+@media (min-width: 720px) { 
+  .gallery { 
+    grid-template-columns: 1fr 1fr; 
+  } 
+}
+
+figure { 
+  margin: 0; 
+}
+
+figure img { 
+  width: 100%;
+  height: auto; 
+  display: block;
+  border-radius: 8px; 
+}
+
+figcaption { 
+  color: var(--muted); 
+  font-size: .9rem; 
+  margin-top: .35rem; 
+}
