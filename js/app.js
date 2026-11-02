@@ -21,4 +21,21 @@
   MapView.render(layer);
   MapNav.init(viewport, layer, document.querySelector('.toolbar'), document.getElementById('zoom-level'));
 
+  SeatStore.subscribe(changed => MapView.paint(changed));
+  layer.addEventListener('click', ev => {
+    const btn = ev.target.closest('button[data-seat-id]');
+    if (btn) SeatStore.inspect(btn.dataset.seatId);
+  });
+  document.addEventListener('keydown', ev => { if (ev.key === 'Escape') SeatStore.clearInspection(); });
+
+  const detailsEl = document.getElementById('seat-details');
+  function showDetails() {
+    const id = SeatStore.getInspectedId();
+    SeatDetails.render(detailsEl, id && MapView.getSeat(id), id && SeatStore.stateOf(id), id && SeatStore.getUnavailableReason(id));
+  }
+  SeatStore.subscribe(showDetails);
+  detailsEl.addEventListener('click', ev => {
+    if (ev.target.closest('[data-action="clear-inspection"]')) SeatStore.clearInspection();
+  });
+
   })();
