@@ -16,4 +16,9 @@
     .join('');
   document.getElementById('cart-total').textContent = money(0);
   
+  const viewport = document.getElementById('map-viewport');
+  const layer = document.getElementById('map-layer');
+  MapView.render(layer);
+  MapNav.init(viewport, layer, document.querySelector('.toolbar'), document.getElementById('zoom-level'));
+
   })();

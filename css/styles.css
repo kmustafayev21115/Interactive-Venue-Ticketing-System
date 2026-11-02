@@ -300,3 +300,33 @@ figcaption {
   background: var(--cat); 
   cursor: pointer; 
 }
+
+.map-layer .seat { 
+  transition: box-shadow .12s; 
+}
+
+.map-layer .seat--available:hover { 
+  box-shadow: 0 0 0 3px var(--led); 
+}
+
+.map-layer .seat:focus-visible { 
+  outline: 3px solid var(--ink); 
+  outline-offset: 2px; 
+  z-index: 2; 
+}
+
+.map-layer .seat--inspected { 
+  z-index: 3; 
+  transform: rotate(var(--rot, 0deg)) scale(1.35); 
+  background: #fff; 
+  border-color: var(--cat); 
+}
+
+.map-layer .seat--in-cart { 
+  border-color: #fff; 
+  box-shadow: 0 0 0 2px var(--ok); 
+}
+
+.map-layer .seat--unavailable { 
+  cursor: not-allowed; 
+}
