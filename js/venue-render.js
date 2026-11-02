@@ -35,6 +35,18 @@ const MapView = (() => {
     return btn;
   }
 
+  const STATE_TEXT = { available: 'available', inspected: 'selected for inspection', 'in-cart': 'in your cart', unavailable: 'unavailable' };
+
+  function paintButton(btn, seat) {
+    const state = SeatStore.stateOf(seat.id);
+    btn.className = `seat seat--${state}`;
+    btn.setAttribute('aria-pressed', String(state === 'inspected'));
+    btn.setAttribute('aria-disabled', String(state === 'unavailable'));
+    btn.setAttribute('aria-label',
+      `${seat.sectionName}, row ${seat.row}, seat ${seat.number}, ${seat.category}, ${STATE_TEXT[state]}`);
+  }
+  function paint(ids) { ids.forEach(id => paintButton(buttons.get(id), seats.get(id))); }
+
   function addLabel(layer, className, text, x, y) {
     const el = document.createElement('div');
     el.className = className;
@@ -71,4 +83,7 @@ const MapView = (() => {
     });
     layer.appendChild(frag);
   }
+
+  return { buildSeats, render, paint, getSeat: id => seats.get(id), getButton: id => buttons.get(id) };
 })();
+
