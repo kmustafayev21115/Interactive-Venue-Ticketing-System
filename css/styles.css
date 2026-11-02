@@ -257,3 +257,46 @@ figcaption {
   font-size: .9rem; 
   margin-top: .35rem; 
 }
+
+.map-layer { 
+  position: absolute;
+  top: 0; 
+  left: 0; 
+  transform-origin: 0 0; 
+}
+
+.stage { 
+  position: absolute; 
+  border-radius: 50%; 
+  background: linear-gradient(#f0d3a8, var(--wood-300)); 
+  border: 4px solid var(--wood-700); 
+}
+
+.stage-label, .section-label { 
+  position: absolute; 
+  transform: translateX(-50%); 
+  white-space: nowrap; pointer-events: none; 
+}
+
+.stage-label { 
+  font: 600 1.6rem var(--font-display); 
+  color: var(--wood-700); 
+}
+
+.section-label { 
+  font-size: .8rem; 
+  color: var(--muted); 
+}
+.map-layer .seat { 
+  position: absolute; 
+  padding: 0; 
+  min-height: 0; 
+  width: 22px; 
+  height: 22px; 
+  transform: rotate(var(--rot, 0deg)); 
+}
+
+.map-layer .seat--available { 
+  background: var(--cat); 
+  cursor: pointer; 
+}

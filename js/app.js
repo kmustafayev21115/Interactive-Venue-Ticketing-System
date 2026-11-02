@@ -15,4 +15,5 @@
     .map(c => `<li><span><span class="swatch" style="background:${c.color}"></span>${c.label}</span><strong>${money(c.price)}</strong></li>`)
     .join('');
   document.getElementById('cart-total').textContent = money(0);
-  });
+  
+  })();

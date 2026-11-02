@@ -28,7 +28,7 @@
         <button type="button" data-action="reset">Reset view</button>
       </div>
       <div class="map-viewport" id="map-viewport">
-        <img src="docs/layout-sketch.svg" alt="Sketch of the auditorium: stage at the top, three seating tiers below it">
+        <div class="map-layer" id="map-layer" aria-label="Seat map"></div>
       </div>
       <ul class="legend" id="state-legend" aria-label="Seat states">
         <li><span class="seat seat--available"></span>Available</li>
@@ -65,6 +65,7 @@
   </section>
 
   <script src="js/venue-data.js"></script>
+  <script src="js/venue-render.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
