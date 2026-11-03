@@ -87,3 +87,4 @@ const MapView = (() => {
   return { buildSeats, render, paint, getSeat: id => seats.get(id), getButton: id => buttons.get(id) };
 })();
 
+if (typeof module !== 'undefined') module.exports = { MapView };
