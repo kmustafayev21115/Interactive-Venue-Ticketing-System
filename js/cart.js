@@ -23,6 +23,19 @@ const Cart = (() => {
     return true;
   }
 
+  function replaceAll(ids) {
+    const valid = [];
+    ids.forEach(id => {
+      if (MapView.getSeat(id) && SeatStore.stateOf(id) !== 'unavailable' && !valid.includes(id)) valid.push(id);
+    });
+    items.filter(id => !valid.includes(id)).forEach(id => SeatStore.setInCart(id, false));
+    items.length = 0;
+    items.push(...valid);
+    valid.forEach(id => SeatStore.setInCart(id, true));
+    emit();
+    return new Set(ids).size - valid.length;
+  }
+  
   const total = () => items.reduce((sum, id) => sum + MapView.getSeat(id).price, 0);
 
   return { add, remove, clear, replaceAll, total, has: id => items.includes(id), getItems: () => items.slice(), subscribe: fn => listeners.push(fn) };
