@@ -38,4 +38,18 @@
     if (ev.target.closest('[data-action="clear-inspection"]')) SeatStore.clearInspection();
   });
 
-  })();
+  const addButton = document.getElementById('add-to-cart');
+  const cartList = document.getElementById('cart-items');
+  const message = document.getElementById('cart-message');
+
+  const dropped = Cart.replaceAll(CartStorage.load());
+  if (Cart.getItems().length) message.textContent = `Restored ${Cart.getItems().length} ticket(s) from your last visit.`;
+  if (dropped) message.textContent += ` ${dropped} saved seat(s) could not be restored.`;
+  CartStorage.save(Cart.getItems());
+  Cart.subscribe(ids => CartStorage.save(ids));
+  window.addEventListener('storage', ev => {
+    if (ev.key === CartStorage.KEY) Cart.replaceAll(CartStorage.load());
+
+  });
+  
+})();
