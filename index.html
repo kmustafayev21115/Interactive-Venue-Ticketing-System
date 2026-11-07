@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <noscript><p class="noscript">This ticket map needs JavaScript. Please enable it and reload.</p></noscript>
   <header class="masthead">
     <div>
       <h1>Main Auditorium</h1>
@@ -28,8 +29,8 @@
         <button type="button" data-action="reset">Reset view</button>
         <span class="zoom-level" id="zoom-level" aria-live="polite">100%</span>
       </div>
-      <div class="map-viewport" id="map-viewport">
-        <div class="map-layer" id="map-layer" aria-label="Seat map"></div>
+      <div class="map-viewport" id="map-viewport" tabindex="0" role="group" aria-label="Seat map. Arrow keys move, plus and minus zoom, 0 resets.">
+      <div class="map-layer" id="map-layer" aria-label="Seat map"></div>
       </div>
       <ul class="legend" id="state-legend" aria-label="Seat states">
         <li><span class="seat seat--available"></span>Available</li>
@@ -42,7 +43,7 @@
     <aside class="side">
       <section class="panel" aria-labelledby="details-title">
         <h2 id="details-title">Seat details</h2>
-        <div id="seat-details" class="empty">Select a seat on the map to see its row, number and price.</div>
+        <div id="seat-details" class="empty" aria-live="polite">Select a seat on the map to see its row, number and price.</div>
         <button type="button" class="primary" id="add-to-cart" disabled>Add to cart</button>
         <p class="hint" id="cart-message" aria-live="polite">Inspect a seat first, then add it to your cart.</p>
       </section>
@@ -50,6 +51,7 @@
       <section class="panel" aria-labelledby="cart-title">
         <h2 id="cart-title">Your cart</h2>
         <ul id="cart-items" class="cart-items"><li class="empty">No tickets yet. Add a seat to start.</li></ul>
+        <button type="button" class="link" id="clear-cart" hidden>Clear cart</button>
         <p class="total"><span>Total</span><strong id="cart-total">₼0.00</strong></p>
       </section>
 

@@ -35,7 +35,14 @@ const Cart = (() => {
     emit();
     return new Set(ids).size - valid.length;
   }
-  
+
+  function clear() {
+    const ids = items.slice();
+    items.length = 0;
+    ids.forEach(id => SeatStore.setInCart(id, false));
+    emit();
+  }
+
   const total = () => items.reduce((sum, id) => sum + MapView.getSeat(id).price, 0);
 
   return { add, remove, clear, replaceAll, total, has: id => items.includes(id), getItems: () => items.slice(), subscribe: fn => listeners.push(fn) };
