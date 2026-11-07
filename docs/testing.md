@@ -16,3 +16,9 @@ Tick each item after trying it in a browser, and note the browser and width used
 - [ ] Clear cart empties the cart and restores every seat
 - [ ] Widths to try: 360, 600, 768, 960, 1280 px (toolbar wraps, panels stack below 960 px)
 - [ ] Open in a private window where storage may be blocked: the page still works
+
+## Bonus (mouse navigation)
+- [ ] Mouse wheel zooms around the cursor and stops at the zoom limits
+- [ ] Click-and-drag on the map pans it and stops at the map edges
+- [ ] A short click on a seat (no drag) still inspects the seat; releasing after a drag does not
+- [ ] All buttons still work after using the mouse

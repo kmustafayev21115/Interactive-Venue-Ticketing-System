@@ -490,3 +490,16 @@ button.remove:hover {
   color: #8a1030; 
   text-align: center; 
 }
+
+.map-viewport { 
+  cursor: grab;
+ }
+
+.map-viewport.is-dragging, .map-viewport.is-dragging * { 
+  cursor: grabbing !important; 
+}
+
+.map-viewport { 
+  touch-action: manipulation; 
+  user-select: none; 
+}
