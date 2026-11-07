@@ -62,6 +62,10 @@ const MapNav = (() => {
       const btn = ev.target.closest('[data-action]');
       if (btn && actions[btn.dataset.action]) actions[btn.dataset.action]();
     });
+    const keys = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right', '+': 'zoom-in', '=': 'zoom-in', '-': 'zoom-out', '0': 'reset' };
+    viewport.addEventListener('keydown', ev => {
+      if (ev.target === viewport && keys[ev.key]) { ev.preventDefault(); actions[keys[ev.key]](); }
+    });
     window.addEventListener('resize', onResize);
     reset();
   }

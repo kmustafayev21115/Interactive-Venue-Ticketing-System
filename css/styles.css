@@ -477,3 +477,16 @@ button.remove:hover {
     scroll-behavior: auto !important; 
   }
 }
+
+.map-viewport:focus-visible { 
+  outline: 3px solid var(--led); 
+  outline-offset: 2px; 
+}
+
+.noscript { 
+  margin: 0; 
+  padding: 1rem; 
+  background: #fbe9ee; 
+  color: #8a1030; 
+  text-align: center; 
+}

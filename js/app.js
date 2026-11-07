@@ -42,6 +42,30 @@
   const cartList = document.getElementById('cart-items');
   const message = document.getElementById('cart-message');
 
+  const clearButton = document.getElementById('clear-cart');
+  const refreshCart = () => {
+    CartUI.renderCart(cartList, document.getElementById('cart-total'), document.getElementById('cart-title'));
+    clearButton.hidden = Cart.getItems().length === 0;
+  };
+  clearButton.addEventListener('click', () => { Cart.clear(); message.textContent = 'Your cart is empty.'; });
+  const refreshButton = () => CartUI.renderAddButton(addButton);
+
+  addButton.addEventListener('click', () => {
+    const id = SeatStore.getInspectedId();
+    const result = Cart.add(id);
+    message.textContent = result.ok ? `Added ${id} to your cart.` : CartUI.MESSAGES[result.reason];
+  });
+  cartList.addEventListener('click', ev => {
+    const btn = ev.target.closest('[data-remove]');
+    if (!btn) return;
+    Cart.remove(btn.dataset.remove);
+    message.textContent = `Removed ${btn.dataset.remove} from your cart.`;
+  });
+  Cart.subscribe(refreshCart);
+  SeatStore.subscribe(refreshButton);
+  refreshCart();
+  refreshButton();
+
   const dropped = Cart.replaceAll(CartStorage.load());
   if (Cart.getItems().length) message.textContent = `Restored ${Cart.getItems().length} ticket(s) from your last visit.`;
   if (dropped) message.textContent += ` ${dropped} saved seat(s) could not be restored.`;
@@ -49,7 +73,5 @@
   Cart.subscribe(ids => CartStorage.save(ids));
   window.addEventListener('storage', ev => {
     if (ev.key === CartStorage.KEY) Cart.replaceAll(CartStorage.load());
-
   });
-  
 })();
