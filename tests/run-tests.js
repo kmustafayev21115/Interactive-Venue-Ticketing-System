@@ -102,6 +102,28 @@ test('small screens start at a readable zoom', () => {
   const { run } = boot({ w: 360, h: 420 });
   assert.strictEqual(run('MapNav.getView().scale'), 0.6);
 });
+test('wheel zoom keeps the point under the cursor fixed', () => {
+  const { run } = boot();
+  run('MapNav.zoomBy(2)');
+  const before = run('MapNav.getView()'), cx = 300, cy = 200;
+  const world = [(cx - before.x) / before.scale, (cy - before.y) / before.scale];
+  run(`MapNav.zoomAt(1.3, ${cx}, ${cy})`);
+  const after = run('MapNav.getView()');
+  assert.ok(after.scale > before.scale);
+  assert.ok(Math.abs((cx - after.x) / after.scale - world[0]) < 1e-6);
+  assert.ok(Math.abs((cy - after.y) / after.scale - world[1]) < 1e-6);
+});
+test('drag panning moves the map and stays inside the limits', () => {
+  const { run } = boot();
+  run('MapNav.zoomBy(2)');
+  const a = run('MapNav.getView()');
+  run('MapNav.panBy(-40, -30)');
+  const b = run('MapNav.getView()');
+  assert.ok(Math.abs(b.x - (a.x - 40)) < 1e-6 && Math.abs(b.y - (a.y - 30)) < 1e-6);
+  run('MapNav.panBy(99999, 99999)');
+  assert.strictEqual(run('MapNav.getView().x'), 0);
+  assert.strictEqual(run('MapNav.getView().y'), 0);
+});
 
 let failed = 0;
 tests.forEach(t => {
