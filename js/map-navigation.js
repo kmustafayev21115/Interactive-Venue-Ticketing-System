@@ -34,6 +34,10 @@ const MapNav = (() => {
     apply();
   }
 
+    function startScale() {
+    return viewport.clientWidth < SMALL_SCREEN ? Math.min(1, Math.max(minScale, COMFORT_SCALE)) : minScale;
+  }
+
   function reset() {
     minScale = fitScale();
     view = { scale: minScale, x: 0, y: 0 };

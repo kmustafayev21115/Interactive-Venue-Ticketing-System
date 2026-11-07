@@ -414,3 +414,66 @@ button.remove:hover {
   background: #fbe9ee; 
   border-color: var(--seat); 
 }
+
+@media (max-width: 959px) {
+  .map-viewport { 
+    height: clamp(320px, 58vh, 560px); 
+  }
+}
+
+@media (max-width: 600px) {
+  .masthead { 
+    padding: 1rem; 
+  }
+  .layout { 
+    padding: .75rem; 
+    gap: .75rem; 
+  }
+  .panel { 
+    padding: .75rem;
+  }
+  .toolbar { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+  }
+  .toolbar button { 
+    padding: .4rem .25rem; 
+    font-size: .85rem; 
+  }
+  .zoom-level { 
+    margin: 0; 
+    text-align: center; 
+  }
+  .map-note { 
+    display: none; 
+  }
+  .legend { 
+    gap: .4rem 1rem; 
+  }
+  .cart-item { 
+    grid-template-columns: 1fr auto; 
+  }
+  .cart-item .remove { 
+    grid-column: 1 / -1; 
+    justify-self: end; 
+  }
+  .gallery { 
+    padding: 0 .75rem 1.5rem; 
+  }
+}
+
+@media (pointer: coarse) {
+  button { 
+    min-height: 44px; 
+  }
+  button.link { 
+    min-height: 0; 
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { 
+    transition: none !important; 
+    scroll-behavior: auto !important; 
+  }
+}
